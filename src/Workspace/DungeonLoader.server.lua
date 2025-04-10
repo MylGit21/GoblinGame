@@ -101,10 +101,11 @@ local function GenerateDungeon(startingPosition, maxNodes)
 			end
 			if nodeData then break end
 		end
-
+	
 		local nextNodeTypes = nodeData and nodeData.NextNodeTypes or {"Hallway"}
+		local currentFamily = nodeData and nodeData.Family
 		local weightedList = {}
-
+	
 		-- Loop through all corridors in the dictionary
 		for category, subcategories in pairs(DungeonModule.dict) do
 			-- Check if this category matches any of our NextNodeTypes
@@ -114,7 +115,14 @@ local function GenerateDungeon(startingPosition, maxNodes)
 						for _, item in ipairs(items) do
 							local rarity = item.Rarity or 1
 							local model = CorridorFolder:FindFirstChild(item.ModelName)
+							
 							if model then
+								-- Double the rarity if the family matches the current node's family
+								if currentFamily and item.Family == currentFamily then
+									warn(currentFamily, item.Family, "Family Match")
+									rarity = rarity * 5
+								end
+								
 								for i = 1, rarity do
 									table.insert(weightedList, model)
 								end
@@ -125,8 +133,8 @@ local function GenerateDungeon(startingPosition, maxNodes)
 				end
 			end
 		end
-
-		-- Select a random hallway from the weighted list
+	
+		-- Select a random corridor from the weighted list
 		if #weightedList > 0 then
 			return weightedList[math.random(#weightedList)]
 		else

@@ -147,3 +147,20 @@ OptionsButton.MouseButton1Click:Connect(onCLickOptionsButton)
 OptionsScreen.BackButton.MouseButton1Click:Connect(onClickOptionsBackButton)
 HostGameScreen.BackButton.MouseButton1Click:Connect(onClickHostBackButton)
 JoinGameScreen.BackButton.MouseButton1Click:Connect(onCLickJoinBackButton)
+
+
+
+
+-- [[ DELETE LATER THIS IS FOR ANOTHER MODULE - LOBBYHANDLER ]] --
+math.randomseed(tick() * 10000)
+function randomId() -- For creating a random lobby ID 6 integers
+	math.randomseed(os.time())
+	return math.random(100000, 999999)
+end
+
+local randomId1 = randomId() -- Call the function to generate a random ID
+local randomId2 = randomId() -- Call the function to generate a random ID
+
+print("Random ID 1: " .. randomId1) -- Print the random ID to the output
+wait(1)
+print("Random ID 2: " .. randomId2) -- Print the random ID to the output

@@ -1,14 +1,22 @@
+--[[
+HostGameHandler.client.lua
+This module script is responsible for handling the hosting of games, including creating and deleting lobbies.
+
+Updated: 4/17/2025
+Author: Makena
+]]
+
+
 local LobbyHandler = {}
 
 local lobbies = {}
 local playerLobbies = {}
 
 
-function randomId() - For creating a random lobby ID 6 integers
-    local id = ""
-    for i = i, 6 do
-        id = append(id, math.random(0, 9))
-    
+function randomId() -- For creating a random lobby ID 6 integers
+	local id = task.wait(2)
+	id = math.random(100000, 999999)
+	return id
 end
 
 function LobbyHandler:CreateLobby(player, lobbyId)
